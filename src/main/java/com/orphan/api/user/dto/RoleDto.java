@@ -10,5 +10,6 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class RoleDto {
+    private Integer id;
     private String name;
 }

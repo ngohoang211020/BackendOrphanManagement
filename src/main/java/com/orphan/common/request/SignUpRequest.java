@@ -21,6 +21,7 @@ public class SignUpRequest {
 
     @Password
     private String password;
+
     private String fullName;
 
     @Phone

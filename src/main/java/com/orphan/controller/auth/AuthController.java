@@ -42,9 +42,6 @@ public class AuthController {
     private UserService userService;
 
     @Autowired
-    private PasswordEncoder encoder;
-
-    @Autowired
     private JwtUtils jwtUtils;
 
     @Operation(summary = "Đăng nhập", description = "Trả về jwt và thông tin user", tags = {"Login/logout"})
@@ -81,46 +78,6 @@ public class AuthController {
     @Operation(summary = "Đăng ký", description = "Trả về message", tags = {"Login/logout"})
     @PostMapping("/signup")
     public ResponseEntity<?> registerUser(@RequestBody @Valid SignUpRequest signUpRequest) {
-
-        if (userService.existsByEmail(signUpRequest.getEmail())) {
-            return ResponseEntity
-                    .badRequest()
-                    .body(new MessageResponse("Error: Email is already in use!", false));
-        }
-        if (userService.existsByIdentification(signUpRequest.getIdentification())) {
-            return ResponseEntity
-                    .badRequest()
-                    .body(new MessageResponse("Error: Identification is already in use!", false));
-        }
-        // Create new user's account
-        User user = new User(signUpRequest.getEmail(),
-                encoder.encode(signUpRequest.getPassword()), signUpRequest.getFullName(), signUpRequest.getPhone(), signUpRequest.getIdentification(), signUpRequest.getImage());
-
-
-        Set<String> strRoles = signUpRequest.getRoles();
-        Set<Role> roles = new HashSet<>();
-
-        if (strRoles.size() != 0) {
-            strRoles.forEach(role -> {
-                switch (role) {
-                    case "admin":
-                        Role adminRole = userService.findByName(ERole.ROLE_ADMIN);
-                        roles.add(adminRole);
-                        break;
-                    case "manager":
-                        Role modRole = userService.findByName(ERole.ROLE_MANAGER);
-                        roles.add(modRole);
-                        break;
-                }
-            });
-        } else {
-            Role userRole = userService.findByName(ERole.ROLE_MANAGER);
-            roles.add(userRole);
-        }
-
-        user.setRoles(roles);
-        userService.save(user);
-
-        return ResponseEntity.ok(new MessageResponse("User registered successfully!", true));
+     return ResponseEntity.ok(userService.save(signUpRequest));
     }
 }

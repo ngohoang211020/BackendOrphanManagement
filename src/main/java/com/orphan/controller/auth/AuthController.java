@@ -1,7 +1,5 @@
 package com.orphan.controller.auth;
 
-import com.orphan.common.entity.Role;
-import com.orphan.common.entity.User;
 import com.orphan.common.request.LoginRequest;
 import com.orphan.common.request.SignUpRequest;
 import com.orphan.common.response.JwtResponse;
@@ -9,7 +7,6 @@ import com.orphan.common.response.MessageResponse;
 import com.orphan.common.service.UserService;
 import com.orphan.config.security.jwt.JwtUtils;
 import com.orphan.config.security.service.UserDetailsImpl;
-import com.orphan.enums.ERole;
 import io.swagger.v3.oas.annotations.Operation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,11 +17,9 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 

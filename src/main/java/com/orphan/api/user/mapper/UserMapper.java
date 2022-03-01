@@ -1,7 +1,7 @@
 package com.orphan.api.user.mapper;
 
 import com.orphan.api.user.dto.UserDto;
-import com.orphan.common.entity.User;
+import com.orphan.common.entity.user.User;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;

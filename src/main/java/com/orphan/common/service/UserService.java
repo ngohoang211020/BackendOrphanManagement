@@ -2,8 +2,10 @@ package com.orphan.common.service;
 
 import com.orphan.api.user.dto.UserDto;
 import com.orphan.api.user.mapper.UserMapper;
-import com.orphan.common.entity.Role;
-import com.orphan.common.entity.User;
+import com.orphan.common.constants.SuccessConstants;
+import com.orphan.common.constants.ValidationConstants;
+import com.orphan.common.entity.user.Role;
+import com.orphan.common.entity.user.User;
 import com.orphan.common.repository.RoleRepository;
 import com.orphan.common.repository.UserRepository;
 import com.orphan.common.request.PasswordRequest;
@@ -12,7 +14,6 @@ import com.orphan.common.response.MessageResponse;
 import com.orphan.enums.ERole;
 import com.orphan.exception.UserNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -38,18 +39,13 @@ public class UserService {
         return userRepository.getByEmail(email);
     }
 
-    public void encodePassword(User user) {
-        String encodedPassword = passwordEncoder.encode(user.getPassword());
-        user.setPassword(encodedPassword);
-    }
-
     public MessageResponse save(SignUpRequest signUpRequest) {
 
         if (existsByEmail(signUpRequest.getEmail())) {
-            return new MessageResponse("Error: Email is already in use!", false);
+            return new MessageResponse(ValidationConstants.EMAIL_CONFLICT, false);
         }
         if (existsByIdentification(signUpRequest.getIdentification())) {
-            return new MessageResponse("Error: Identification is already in use!", false);
+            return new MessageResponse(ValidationConstants.IDENTIFICATION_CONFLICT, false);
         }
         // Create new user's account
         User user = new User(signUpRequest.getEmail(),
@@ -80,18 +76,18 @@ public class UserService {
         user.setRoles(roles);
         save(user);
 
-        return new MessageResponse("User registered successfully!", true);
+        return new MessageResponse(SuccessConstants.CREATE_USER_SUCCESS, true);
     }
 
     public MessageResponse updateUser(UserDto userDto,Integer id) {
         User user = userRepository.findById(id).get();
         if(!user.getEmail().equals(userDto.getEmail())){
             if (userRepository.existsByEmail(userDto.getEmail())) {
-            return new MessageResponse("Error: Email is already in use!", false);
+            return new MessageResponse(ValidationConstants.EMAIL_CONFLICT, false);
         }}
         if(!user.getIdentification().equals(userDto.getIdentification())){
           if (userRepository.existsByIdentification(userDto.getIdentification())) {
-            return new MessageResponse("Error: Identification is already in use!", false);
+            return new MessageResponse(ValidationConstants.IDENTIFICATION_CONFLICT, false);
         }}
 
         user.setEmail(userDto.getEmail());
@@ -102,7 +98,7 @@ public class UserService {
             user.setImage(userDto.getImage());
         }
         save(user);
-        return new MessageResponse("Success: User update successfully!!", true);
+        return new MessageResponse(SuccessConstants.UPDATE_USER_SUCCESS, true);
     }
 
     public void save(User user) {

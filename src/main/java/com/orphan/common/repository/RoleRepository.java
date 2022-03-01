@@ -1,6 +1,6 @@
 package com.orphan.common.repository;
 
-import com.orphan.common.entity.Role;
+import com.orphan.common.entity.user.Role;
 import com.orphan.enums.ERole;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

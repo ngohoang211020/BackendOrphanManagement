@@ -3,6 +3,7 @@ package com.orphan.common.request;
 import com.orphan.common.annotation.Identification;
 import com.orphan.common.annotation.Password;
 import com.orphan.common.annotation.Phone;
+import com.orphan.common.constants.ValidationConstants;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -16,7 +17,7 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 public class SignUpRequest {
-    @Email(message = "Email không hợp lệ")
+    @Email(message = ValidationConstants.EMAIL_CONFLICT)
     private String email;
 
     @Password
@@ -29,6 +30,8 @@ public class SignUpRequest {
 
     @Identification
     private String identification;
+
     private String image;
+
     private Set<String> roles;
 }

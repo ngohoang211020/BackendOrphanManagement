@@ -2,7 +2,7 @@ package com.orphan.api.user.dto;
 
 import com.orphan.common.annotation.Identification;
 import com.orphan.common.annotation.Phone;
-import com.orphan.common.entity.Role;
+import com.orphan.common.entity.user.Role;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

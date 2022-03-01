@@ -1,4 +1,4 @@
-package com.orphan.common.entity;
+package com.orphan.common.entity.user;
 
 import com.orphan.enums.ERole;
 import lombok.AllArgsConstructor;

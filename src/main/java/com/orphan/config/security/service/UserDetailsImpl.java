@@ -1,7 +1,7 @@
 package com.orphan.config.security.service;
 
-import com.orphan.common.entity.Role;
-import com.orphan.common.entity.User;
+import com.orphan.common.entity.user.Role;
+import com.orphan.common.entity.user.User;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;

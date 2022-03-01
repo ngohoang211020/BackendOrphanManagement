@@ -1,6 +1,6 @@
 package com.orphan.config.security.service;
 
-import com.orphan.common.entity.User;
+import com.orphan.common.entity.user.User;
 import com.orphan.common.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;

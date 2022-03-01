@@ -1,14 +1,10 @@
-package com.orphan.common.entity;
+package com.orphan.common.entity.user;
 
-import com.orphan.common.annotation.Identification;
-import com.orphan.common.annotation.Password;
-import com.orphan.common.annotation.Phone;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import javax.validation.constraints.Email;
 import java.util.HashSet;
 import java.util.Set;
 

@@ -1,7 +1,7 @@
 package com.orphan.controller.admin;
 
 import com.orphan.api.user.dto.UserDto;
-import com.orphan.common.annotation.Password;
+import com.orphan.common.constants.SuccessConstants;
 import com.orphan.common.request.PasswordRequest;
 import com.orphan.common.request.SignUpRequest;
 import com.orphan.common.response.MessageResponse;
@@ -46,25 +46,23 @@ public class AdminController {
 
     @Operation(summary = "Cập nhật tài khoản user", description = "Cập nhật thông tin 1 tài khoản User theo tuỳ chọn theo id ", tags = {"Admin"})
     @PutMapping("/{id}")
-    public ResponseEntity<?> updateUser(@RequestBody @Valid UserDto userDto,@PathVariable("id")Integer id) {
-        return ResponseEntity.ok( userService.updateUser(userDto,id));
+    public ResponseEntity<?> updateUser(@RequestBody @Valid UserDto userDto, @PathVariable("id") Integer id) {
+        return ResponseEntity.ok(userService.updateUser(userDto, id));
     }
 
     @Operation(summary = "Thay đổi mật khẩu tài khoản User", description = "Thay đổi mật khẩu của 1 tài khoản User tuỳ chọn theo id ", tags = {"Admin"})
     @PostMapping("/changePassword/{id}")
     public ResponseEntity<?> changePasswordUser(@PathVariable("id") Integer id, @RequestBody PasswordRequest password) {
-        userService.changePassword(password,id);
-        return ResponseEntity.ok(new MessageResponse("Change Password User Successfull!", true));
+        userService.changePassword(password, id);
+        return ResponseEntity.ok(new MessageResponse(SuccessConstants.CHANGE_PASSWORD_USER_SUCCESS, true));
     }
 
     @Operation(summary = "Xoá tài khoản user", description = "Xoá 1 tài khoản User tuỳ chọn theo id", tags = {"Admin"})
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteUserById(@PathVariable("id") Integer id) {
         userService.deleteById(id);
-        return ResponseEntity.ok(new MessageResponse("Delete User Successfull!", true));
+        return ResponseEntity.ok(new MessageResponse(SuccessConstants.DELETE_USER_SUCCESS, true));
     }
-
-
 
 
 }

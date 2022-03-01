@@ -1,9 +1,11 @@
 package com.orphan.common.annotation;
 
+import com.orphan.common.constants.ValidationConstants;
 import com.orphan.common.validator.PhoneValidator;
 
 import javax.validation.Constraint;
 import javax.validation.Payload;
+import javax.validation.Validation;
 import java.lang.annotation.*;
 
 @Documented
@@ -14,7 +16,7 @@ import java.lang.annotation.*;
 // cho biết annotation có thể được truy cập qua reflection tại thời điểm runtime, nếu bạn không
 // khai báo nó khi định nghĩa một annotation bạn sẽ không thể truy cập nó tại thời điểm runtime.
 public @interface Phone {
-    String message() default "Số điện thoại không đúng định dạng!!!";
+    String message() default ValidationConstants.PHONE_PATTERN;
 
     Class<?>[] groups() default {};
 

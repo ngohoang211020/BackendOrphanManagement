@@ -1,5 +1,6 @@
 package com.orphan.common.annotation;
 
+import com.orphan.common.constants.ValidationConstants;
 import com.orphan.common.validator.IdentificationValidator;
 
 import javax.validation.Constraint;
@@ -11,7 +12,7 @@ import java.lang.annotation.*;
 @Target({ElementType.METHOD, ElementType.FIELD})
 @Retention(RetentionPolicy.RUNTIME)
 public @interface Identification {
-    String message() default "Số CMND không đúng định dạng!!!";
+    String message() default ValidationConstants.IDENTIFICATION_PATTERN;
 
     Class<?>[] groups() default {};
 

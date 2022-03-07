@@ -31,6 +31,16 @@ public class ManageChildrenController {
         ChildrenDto childrenDto = service.findById(id);
         return ResponseEntity.ok(childrenDto);
     }
+     @Operation(summary = "Thêm thông tin trẻ em", description = "Thêm thông tin của 1 Children", tags = {"Manager/Children"})
+    @PostMapping
+    public ResponseEntity<?> addChildren(@RequestBody @Valid ChildrenDto childrenDto) {
+        return ResponseEntity.ok(service.save(childrenDto));
+    }
+    @Operation(summary = "Cập nhật thông tin trẻ em", description = "Cập nhật thông tin của 1 Children theo id", tags = {"Manager/Children"})
+    @PutMapping("/{id}")
+    public ResponseEntity<?> updateChildren(@PathVariable("id") Integer id, @RequestBody @Valid ChildrenDto childrenDto) {
+        return ResponseEntity.ok(service.update(childrenDto, id));
+    }
 
 
 }

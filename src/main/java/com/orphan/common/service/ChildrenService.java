@@ -27,5 +27,21 @@ public class ChildrenService {
         Children children = childrenRepository.findById(id).get();
         return ChildrenMapper.INSTANCE.childrenToChildrenDto(children);
     }
+     public ChildrenDto save(ChildrenDto childrenDto) {
+        Children children = ChildrenMapper.INSTANCE.childrenDtoToChildren(childrenDto);
+        Children saveChildren = childrenRepository.save(children);
+        return ChildrenMapper.INSTANCE.childrenToChildrenDto(saveChildren);
+    }
 
+    public ChildrenDto update(ChildrenDto childrenDto, Integer id) {
+        Children existsChildren = childrenRepository.findById(id).get();
+        Children children = ChildrenMapper.INSTANCE.childrenDtoToChildren(childrenDto);
+        if (existsChildren != null) {
+            if (childrenDto.getImage() == null && childrenDto.getImage().isEmpty()) {
+                children.setImage(existsChildren.getImage());
+            }
+        }
+        Children saveChildren = childrenRepository.save(children);
+        return ChildrenMapper.INSTANCE.childrenToChildrenDto(saveChildren);
+    }
 }
